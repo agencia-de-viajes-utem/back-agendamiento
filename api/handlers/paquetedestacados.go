@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
-	"time"
 )
 
 func ObtenerPaquetesDestacados(w http.ResponseWriter, r *http.Request) {
@@ -112,8 +111,8 @@ func ObtenerPaquetesDestacados(w http.ResponseWriter, r *http.Request) {
 
 	for rows.Next() {
 		var paqueteDestacado models.PaquetesDestacados
-		var infoPaquete models.PaqueteInfoAdicionalHotel
-		var hotelInfo models.InfoHotel
+		var infoPaqueteDestacado models.PaqueteInfoAdicionalDestacado
+		var hotelInfoDestacado models.HotelInfoDestacado
 
 		err := rows.Scan(
 			&paqueteDestacado.Vistas,
@@ -124,49 +123,37 @@ func ObtenerPaquetesDestacados(w http.ResponseWriter, r *http.Request) {
 			&paqueteDestacado.Descripcion,
 			&paqueteDestacado.Detalles,
 			&paqueteDestacado.PrecioVuelo,
+			&paqueteDestacado.ListaHH,
+			&paqueteDestacado.Imagenes,
 			&paqueteDestacado.TotalPersonas,
-			&paqueteDestacado.FechaInit,
-			&paqueteDestacado.FechaFin,
 			&paqueteDestacado.NombreCiudadOrigen,
 			&paqueteDestacado.NombreCiudadDestino,
-			&paqueteDestacado.PrecioOfertaVuelo,
+			&infoPaqueteDestacado.HabitacionId,
+			&infoPaqueteDestacado.OpcionHotelId,
+			&infoPaqueteDestacado.NombreOpcionHotel,
+			&infoPaqueteDestacado.DescripcionHabitacion,
+			&infoPaqueteDestacado.ServiciosHabitacion,
 			&paqueteDestacado.PrecioNoche,
-			&paqueteDestacado.Imagenes,
-			&infoPaquete.NombreOpcionHotel,
-			&infoPaquete.DescripcionHabitacion,
-			&infoPaquete.ServiciosHabitacion,
-			&hotelInfo.NombreHotel,
-			&hotelInfo.DireccionHotel,
-			&hotelInfo.ValoracionHotel,
-			&hotelInfo.DescripcionHotel,
-			&hotelInfo.ServiciosHotel,
-			&hotelInfo.TelefonoHotel,
-			&hotelInfo.CorreoElectronico,
-			&hotelInfo.SitioWeb,
-			&infoPaquete.RowNum,
+			&hotelInfoDestacado.ID,
+			&hotelInfoDestacado.NombreHotel,
+			&hotelInfoDestacado.CiudadIdHotel,
+			&hotelInfoDestacado.DireccionHotel,
+			&hotelInfoDestacado.ValoracionHotel,
+			&hotelInfoDestacado.DescripcionHotel,
+			&hotelInfoDestacado.ServiciosHotel,
+			&hotelInfoDestacado.TelefonoHotel,
+			&hotelInfoDestacado.CorreoElectronico,
+			&hotelInfoDestacado.SitioWeb,
+			&infoPaqueteDestacado.RowNum,
 		)
 		if err != nil {
 			log.Fatal(err)
 			http.Error(w, "Error al escanear los resultados", http.StatusInternalServerError)
 			return
 		}
-		fechaInicio, err := time.Parse("2006-01-02T15:04:05Z", paqueteDestacado.FechaInicio)
-		if err != nil {
-			log.Fatal(err)
-			http.Error(w, "Error al parsear la fecha de inicio", http.StatusInternalServerError)
-			return
-		}
 
-		fechaFin, err := time.Parse("2006-01-02T15:04:05Z", paqueteDestacado.FechaFin)
-		if err != nil {
-			log.Fatal(err)
-			http.Error(w, "Error al parsear la fecha de fin", http.StatusInternalServerError)
-			return
-		}
-
-		// Formatea las fechas como solo la parte de la fecha (sin la hora)
-		paqueteDestacado.FechaInicio = fechaInicio.Format("2006-01-02")
-		paqueteDestacado.FechaFin = fechaFin.Format("2006-01-02")
+		infoPaqueteDestacado.HotelInfo = hotelInfoDestacado
+		paqueteDestacado.InfoPaquete = infoPaqueteDestacado
 
 		paqueteDestacados = append(paqueteDestacados, paqueteDestacado)
 	}
