@@ -10,7 +10,6 @@ import (
 )
 
 func ObtenerPaquetesOfertas(w http.ResponseWriter, r *http.Request) {
-	//CONE CON LA BASE DE DATOS
 	db, err := utils.OpenDB()
 	if err != nil {
 		log.Fatal(err)

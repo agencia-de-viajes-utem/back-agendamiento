@@ -28,7 +28,7 @@ func ConfigureRoutes(r *mux.Router) {
 	r.Handle("/api/agendamiento/paquetes-destacados", http.HandlerFunc(handlers.ObtenerPaquetesDestacados)).Methods("GET")
 
 	//Ruta para los paquetes en oferta
-	r.Handle("/api/agendamiento/paquetes-ofertas", http.HandlerFunc(handlers.ObtenerPaquetesOfertas))
+	r.Handle("/api/agendamiento/paquetes-ofertas", http.HandlerFunc(handlers.ObtenerPaquetesOfertas)).Methods("GET")
 
 	//Ruta para los aeropuertos
 	r.Handle("/api/agendamiento/aeropuerto", http.HandlerFunc(handlers.ObtenerAeropuertos))

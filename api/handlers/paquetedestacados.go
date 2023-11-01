@@ -107,7 +107,7 @@ func ObtenerPaquetesDestacados(w http.ResponseWriter, r *http.Request) {
 	}
 	defer rows.Close()
 
-	var paqueteDestacados []models.PaquetesDestacados
+	paqueteDestacados := make([]models.PaquetesDestacados, 0)
 
 	for rows.Next() {
 		var paqueteDestacado models.PaquetesDestacados
