@@ -30,5 +30,4 @@ func AgregarVista(w http.ResponseWriter, r *http.Request) {
 	logs_paquetes (fk_fechapaquete, cantidad_vistas)
  	VALUES ($1, 1)
 	`, solicitudVista.Fk_fechaPaquete)
-
 }
