@@ -33,6 +33,9 @@ func ConfigureRoutes(r *mux.Router) {
 	//Ruta para los paquetes mas vistos
 	r.Handle("/paquetes-mas-vistos", http.HandlerFunc(handlers.ObtenerMasVistos)).Methods("GET")
 
+	//Ruta para añadir una visita
+	r.Handle("/anadir-vista", http.HandlerFunc(handlers.AgregarVista)).Methods("POST")
+
 	//Ruta para los aeropuertos
 	r.Handle("/aeropuerto", http.HandlerFunc(handlers.ObtenerAeropuertos))
 }
