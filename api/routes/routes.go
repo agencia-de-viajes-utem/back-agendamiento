@@ -13,23 +13,26 @@ func ConfigureRoutes(r *mux.Router) {
 	//r.Use(c)
 
 	//Ruta estandar
-	r.Handle("/api/agendamiento", http.HandlerFunc(handlers.HomeHandler))
+	r.Handle("/", http.HandlerFunc(handlers.HomeHandler))
 
 	//Ruta para los aeropuertos
-	r.Handle("/api/agendamiento/aeropuertos", http.HandlerFunc(handlers.ListarAeropuertos)).Methods("GET")
+	r.Handle("/aeropuertos", http.HandlerFunc(handlers.ListarAeropuertos)).Methods("GET")
 
 	//Ruta para los paquetes
-	r.Handle("/api/agendamiento/paquetes", http.HandlerFunc(handlers.ObtenerPaquetes)).Methods("POST")
+	r.Handle("/paquetes", http.HandlerFunc(handlers.ObtenerPaquetes)).Methods("GET")
 
 	//Ruta para los paquetes por mes
-	r.Handle("/api/agendamiento/paquetes-mes", http.HandlerFunc(handlers.ObtenerPaquetesMes)).Methods("POST")
+	r.Handle("/paquetes-mes", http.HandlerFunc(handlers.ObtenerPaquetesMes)).Methods("GET")
 
 	//Ruta para los paquetes destacados
-	r.Handle("/api/agendamiento/paquetes-destacados", http.HandlerFunc(handlers.ObtenerPaquetesDestacados)).Methods("GET")
+	r.Handle("/paquetes-destacados", http.HandlerFunc(handlers.ObtenerPaquetesDestacados)).Methods("GET")
 
 	//Ruta para los paquetes en oferta
-	r.Handle("/api/agendamiento/paquetes-ofertas", http.HandlerFunc(handlers.ObtenerPaquetesOfertas)).Methods("GET")
+	r.Handle("/paquetes-ofertas", http.HandlerFunc(handlers.ObtenerPaquetesOfertas)).Methods("GET")
+
+	//Ruta para los paquetes mas vistos
+	r.Handle("/paquetes-mas-vistos", http.HandlerFunc(handlers.ObtenerMasVistos)).Methods("GET")
 
 	//Ruta para los aeropuertos
-	r.Handle("/api/agendamiento/aeropuerto", http.HandlerFunc(handlers.ObtenerAeropuertos))
+	r.Handle("/aeropuerto", http.HandlerFunc(handlers.ObtenerAeropuertos))
 }
