@@ -2,5 +2,5 @@ package models
 
 type Aeropuertos struct {
 	ID         int    `json:"id"`
-	Aeropuerto string `json:"aeropuerto"`
+	Aeropuerto string `json:"nombre"`
 }

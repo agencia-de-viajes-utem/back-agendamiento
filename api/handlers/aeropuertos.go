@@ -34,7 +34,7 @@ func ObtenerAeropuertos(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query(`
     SELECT
     A.id AS "Código Aeropuerto",
-	A.nombre AS "Nombre Aeropuerto",
+	A.nombre AS "nombre",
 	C.nombre AS "Ciudad",
     P.nombre AS "País"
 FROM
@@ -62,7 +62,7 @@ WHERE
 	// Itera a través de los resultados y agrega a la slice
 	for rows.Next() {
 		var aeropuerto models.Aeropuerto
-		err := rows.Scan(&aeropuerto.ID, &aeropuerto.Aeropuerto, &aeropuerto.Ciudad, &aeropuerto.Pais)
+		err := rows.Scan(&aeropuerto.ID, &aeropuerto.Nombre, &aeropuerto.Ciudad, &aeropuerto.Pais)
 		if err != nil {
 			log.Fatal(err)
 			http.Error(w, "Error al escanear resultados", http.StatusInternalServerError)
