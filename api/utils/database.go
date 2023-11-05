@@ -3,7 +3,9 @@ package utils
 import (
 	"backend/api/config"
 	"database/sql"
+	"fmt"
 
+	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
 )
 
@@ -14,4 +16,12 @@ func OpenDB() (*sql.DB, error) {
 		return nil, err
 	}
 	return db, nil
+}
+
+// loadEnv carga las variables de entorno
+func LoadEnv() {
+	err := godotenv.Load()
+	if err != nil {
+		fmt.Println("Error loading .env file")
+	}
 }
