@@ -10,6 +10,10 @@ type SolicitudVista struct {
 	Fk_fechaPaquete int `json:"fk_fechaPaquete"`
 }
 
+type Respuesta struct {
+	Mensaje string `json:"mensaje"`
+}
+
 func AgregarVista(w http.ResponseWriter, r *http.Request) {
 	var solicitudVista SolicitudVista
 	err := json.NewDecoder(r.Body).Decode(&solicitudVista)
@@ -30,4 +34,15 @@ func AgregarVista(w http.ResponseWriter, r *http.Request) {
 	logs_paquetes (fk_fechapaquete, cantidad_vistas)
  	VALUES ($1, 1)
 	`, solicitudVista.Fk_fechaPaquete)
+
+	if err != nil {
+		http.Error(w, "Error al agregar la vista", http.StatusInternalServerError)
+		return
+	}
+
+	// Send a JSON response indicating success
+	respuesta := Respuesta{Mensaje: "Vista agregada correctamente"}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(respuesta)
 }

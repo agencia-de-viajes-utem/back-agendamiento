@@ -22,7 +22,7 @@ func RegisterRoutes(router *mux.Router) {
 	router.HandleFunc("/paquetes/destacados", handlers.ObtenerPaquetesDestacados).Methods(http.MethodGet)
 	router.HandleFunc("/paquetes/ofertas", handlers.ObtenerPaquetesOfertas).Methods(http.MethodPost) // pide un JSON en el body es POST
 	router.HandleFunc("/paquetes/mas-vistos", handlers.ObtenerMasVistos).Methods(http.MethodGet)
-	router.HandleFunc("/anadir-vista", handlers.AgregarVista).Methods(http.MethodPost) // pide un JSON en el body es POST
+	router.HandleFunc("/anadir", handlers.AgregarVista).Methods(http.MethodPost) // pide un JSON en el body es POST
 	router.HandleFunc("/aeropuerto", handlers.ObtenerAeropuertos).Methods(http.MethodPost)
 
 }

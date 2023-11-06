@@ -33,9 +33,9 @@ func main() {
 	// Configurar un handler adicional para restringir a los orígenes permitidos y rutas restringidas
 	restrictedRoutes := map[string]bool{
 		"/paquetes":         true,
-		"/paquetes-mes":     true,
-		"/paquetes-ofertas": true,
-		"/anadir-vista":     true,
+		"/paquetes/mes":     true,
+		"/paquetes/ofertas": true,
+		"/anadir":           true,
 	}
 	restrictedHandler := middleware.RestrictedHandler(restrictedRoutes, []string{"http://localhost:3000"}, handler)
 
