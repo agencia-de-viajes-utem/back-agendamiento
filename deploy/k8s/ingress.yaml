@@ -13,7 +13,7 @@ spec:
       paths:
       - backend:
           service:
-            name: golang-service
+            name: back-agendamiento
             port:
               number: 80
         pathType: Prefix
