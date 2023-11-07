@@ -37,14 +37,14 @@ jobs:
         SECRET_NAME="$REPO_NAME-tls"
         
         # Reemplazar los placeholders en la plantilla de Ingress con los valores dinámicos
-        sed -i "s/placeholder-repo-name/$REPO_NAME/g" ./k8s/ingress.yaml
-        sed -i "s/placeholder-host-name/$HOST_NAME/g" ./k8s/ingress.yaml
-        sed -i "s/placeholder-service-name/$SERVICE_NAME/g" ./k8s/ingress.yaml
-        sed -i "s/placeholder-secret-name/$SECRET_NAME/g" ./k8s/ingress.yaml
+        sed -i "s/placeholder-repo-name/$REPO_NAME/g" .deploy/k8s/ingress.yaml
+        sed -i "s/placeholder-host-name/$HOST_NAME/g" .deploy/k8s/ingress.yaml
+        sed -i "s/placeholder-service-name/$SERVICE_NAME/g" .deploy/k8s/ingress.yaml
+        sed -i "s/placeholder-secret-name/$SECRET_NAME/g" .deploy/k8s/ingress.yaml
         
         # Nuevo paso para mostrar el archivo Ingress
     - name: Print the Ingress configuration
-      run: cat ./k8s/ingress.yaml
+      run: cat .deploy/k8s/ingress.yaml
 
     - name: install the gcloud cli
       uses: google-github-actions/setup-gcloud@v0
