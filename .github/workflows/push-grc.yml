@@ -32,19 +32,24 @@ jobs:
     - name: Configure and Apply Kubernetes Ingress
       run: |
         REPO_NAME="${{ github.event.repository.name }}"
-        HOST_NAME="$REPO_NAME.lumonidy.studio"
+        NAMESPACE="default" # Asegúrate de definir o reemplazar esto con el namespace deseado
+        HOST_NAME="api.$REPO_NAME.misitio.com"
         SERVICE_NAME="$REPO_NAME-service"
         SECRET_NAME="$REPO_NAME-tls"
-        
+    
         # Reemplazar los placeholders en la plantilla de Ingress con los valores dinámicos
-        sed -i "s/placeholder-repo-name/$REPO_NAME/g" deploy/k8s/ingress.yaml
-        sed -i "s/placeholder-host-name/$HOST_NAME/g" deploy/k8s/ingress.yaml
-        sed -i "s/placeholder-service-name/$SERVICE_NAME/g" deploy/k8s/ingress.yaml
-        sed -i "s/placeholder-secret-name/$SECRET_NAME/g" deploy/k8s/ingress.yaml
-        
-        # Nuevo paso para mostrar el archivo Ingress
+        sed -i "s/{{REPO_NAME}}/$REPO_NAME/g" /deploy/k8s/ingress.yaml
+        sed -i "s/{{NAMESPACE}}/$NAMESPACE/g" /deploy/k8s/ingress.yaml
+        sed -i "s/{{HOST_NAME}}/$HOST_NAME/g" /deploy/k8s/ingress.yaml
+        sed -i "s/{{SERVICE_NAME}}/$SERVICE_NAME/g" /deploy/k8s/ingress.yaml
+        sed -i "s/{{SECRET_NAME}}/$SECRET_NAME/g" /deploy/k8s/ingress.yaml
+
+
     - name: Print the Ingress configuration
-      run: cat deploy/k8s/ingress.yaml
+      run: cat /deploy/k8s/ingress.yaml
+
+    # Aplicar la configuración de Ingress a tu cluster de Kubernetes
+
 
     - name: install the gcloud cli
       uses: google-github-actions/setup-gcloud@v0
