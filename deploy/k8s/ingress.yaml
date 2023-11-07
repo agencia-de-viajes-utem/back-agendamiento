@@ -21,4 +21,4 @@ spec:
   tls:
   - hosts:
     - api.agendamiento.lumonidy.studio
-    secretName: back-agendamiento-secret
+    secretName: agendamiento-tls
