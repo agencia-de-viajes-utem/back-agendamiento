@@ -1,0 +1,20 @@
+# golang-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: back-agendamiento
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: back-agendamiento
+  template:
+    metadata:
+      labels:
+        app: back-agendamiento
+    spec:
+      containers:
+      - name: back-agendamiento
+        image: gcr.io/annular-form-401215/gcr-alpine:{GITHUB_SHA}
+        ports:
+        - containerPort: 9999

@@ -1,0 +1,13 @@
+#back-agendamiento.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: back-agendamiento
+spec:
+  selector:
+    app: back-agendamiento
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9999
+  type: ClusterIP
