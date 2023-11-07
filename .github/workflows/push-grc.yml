@@ -37,10 +37,10 @@ jobs:
         SECRET_NAME="$REPO_NAME-tls"
         
         # Reemplazar los placeholders en la plantilla de Ingress con los valores dinámicos
-        sed -i "s/placeholder-repo-name/$REPO_NAME/g" .deploy/k8s/ingress.yaml
-        sed -i "s/placeholder-host-name/$HOST_NAME/g" .deploy/k8s/ingress.yaml
-        sed -i "s/placeholder-service-name/$SERVICE_NAME/g" .deploy/k8s/ingress.yaml
-        sed -i "s/placeholder-secret-name/$SECRET_NAME/g" .deploy/k8s/ingress.yaml
+        sed -i "s/placeholder-repo-name/$REPO_NAME/g" deploy/k8s/ingress.yaml
+        sed -i "s/placeholder-host-name/$HOST_NAME/g" deploy/k8s/ingress.yaml
+        sed -i "s/placeholder-service-name/$SERVICE_NAME/g" deploy/k8s/ingress.yaml
+        sed -i "s/placeholder-secret-name/$SECRET_NAME/g" deploy/k8s/ingress.yaml
         
         # Nuevo paso para mostrar el archivo Ingress
     - name: Print the Ingress configuration
