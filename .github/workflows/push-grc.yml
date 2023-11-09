@@ -1,5 +1,4 @@
-name: Push image to Cloud Registry
-
+name: Push To STG
 on:
   push:
     branches: [ "main" ]
@@ -28,28 +27,6 @@ jobs:
       run: |
         echo "${{ secrets.ENV_GO_BACK }}" > .env
       working-directory: ${{ github.workspace }}
-
-    - name: Configure and Apply Kubernetes Ingress
-      run: |
-        REPO_NAME="${{ github.event.repository.name }}"
-        NAMESPACE="default" # Asegúrate de definir o reemplazar esto con el namespace deseado
-        HOST_NAME="api.$REPO_NAME.misitio.com"
-        SERVICE_NAME="$REPO_NAME-service"
-        SECRET_NAME="$REPO_NAME-tls"
-    
-        # Reemplazar los placeholders en la plantilla de Ingress con los valores dinámicos
-        sed -i "s/{{REPO_NAME}}/$REPO_NAME/g" /deploy/k8s/ingress.yaml
-        sed -i "s/{{NAMESPACE}}/$NAMESPACE/g" /deploy/k8s/ingress.yaml
-        sed -i "s/{{HOST_NAME}}/$HOST_NAME/g" /deploy/k8s/ingress.yaml
-        sed -i "s/{{SERVICE_NAME}}/$SERVICE_NAME/g" /deploy/k8s/ingress.yaml
-        sed -i "s/{{SECRET_NAME}}/$SECRET_NAME/g" /deploy/k8s/ingress.yaml
-
-
-    - name: Print the Ingress configuration
-      run: cat /deploy/k8s/ingress.yaml
-
-    # Aplicar la configuración de Ingress a tu cluster de Kubernetes
-
 
     - name: install the gcloud cli
       uses: google-github-actions/setup-gcloud@v0
