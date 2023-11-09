@@ -9,17 +9,18 @@ metadata:
     acme.cert-manager.io/http01-edit-in-place: "true"
 spec:
   rules:
-    - host: api.agendamiento.lumonidy.studio
-      http:
-        paths:
-          - backend:
-              service:
-                name: back-agendamiento
-                port:
-                  number: 80
-            pathType: Prefix
-            path: /
+  - host: api.agendamiento.lumonidy.studio
+    http:
+      paths:
+      - backend:
+          service:
+            name: back-agendamiento
+            port:
+              number: 80
+        pathType: Prefix
+        path: /
   tls:
-    - hosts:
-        - api.agendamiento.lumonidy.studio
-      secretName: agendamiento-tls
+  - hosts:
+    - api.agendamiento.lumonidy.studio
+    secretName: agendamiento-tls
+
