@@ -28,7 +28,7 @@ func main() {
 	routes.RegisterRoutes(r)
 
 	// Configurar CORS con el paquete 'middleware'
-	handler := middleware.CORSHandler([]string{"http://localhost:3001", "http://localhost:3000", "https://agendamiento.lumonidy.studio"}, r)
+	handler := middleware.CORSHandler([]string{"https://3001-cs-731455103768-default.cs-us-east1-vpcf.cloudshell.dev", "http://localhost:3000", "https://agendamiento.lumonidy.studio"}, r)
 
 	// Configurar un handler adicional para restringir a los orígenes permitidos y rutas restringidas
 	restrictedRoutes := map[string]bool{
@@ -37,7 +37,7 @@ func main() {
 		"/paquetes/ofertas": true,
 		"/anadir":           true,
 	}
-	restrictedHandler := middleware.RestrictedHandler(restrictedRoutes, []string{"http://localhost:3001", "http://localhost:3000", "https://agendamiento.lumonidy.studio"}, handler)
+	restrictedHandler := middleware.RestrictedHandler(restrictedRoutes, []string{"https://3001-cs-731455103768-default.cs-us-east1-vpcf.cloudshell.dev", "http://localhost:3000", "https://agendamiento.lumonidy.studio"}, handler)
 
 	fmt.Printf("Servidor corriendo en http://localhost%s\n", port)
 	if err := http.ListenAndServe(port, restrictedHandler); err != nil {
